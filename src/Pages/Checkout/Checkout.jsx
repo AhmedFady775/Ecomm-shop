@@ -178,8 +178,6 @@ function Checkout() {
     </div>
   );
 
-  console.log(shippingAddress);
-
   const deliveryDetailsForm = () => (
     <div className="flex flex-col px-6 h-fit pb-4 ">
       <div className="flex flex-row items-center py-[26px] text-[1.15rem] font-semibold leading-6 tracking-[-1px]">
