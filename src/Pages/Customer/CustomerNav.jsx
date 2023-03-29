@@ -18,7 +18,7 @@ function CustomerNav() {
     localStorage.removeItem("paymentMethod");
   };
   return (
-    <div className="flex flex-col lg:w-[30%] lg:mr-6 shadow lg:rounded bg-white">
+    <div className="flex flex-col lg:w-[30%] lg:mr-6 shadow lg:rounded bg-white h-fit">
       <ul className="flex flex-col">
         <Link
           to="/customer/account"
@@ -29,7 +29,7 @@ function CustomerNav() {
           }
         >
           <li className="flex flex-row items-center px-[24px] py-[10px] border-b h-[57px] ">
-            <span className="mr-4">
+            <span className="mr-6">
               <BsPersonGear size={25} />
             </span>
             Account details
@@ -37,18 +37,18 @@ function CustomerNav() {
         </Link>
 
         <Link
-          to="/customer/orderhistory"
+          to="/customer/myorders"
           className={
-            location.pathname === "/customer/orderhistory"
+            location.pathname === "/customer/myorders"
               ? "text-sm font-semibold leading-5 tracking-[0] hover:bg-[#f4f5f6] transition"
               : "text-sm font-normal leading-5 tracking-[0] hover:bg-[#f4f5f6] transition"
           }
         >
           <li className="flex flex-row items-center px-[24px] py-[10px] border-b h-[57px]">
-            <span className="mr-4">
+            <span className="mr-6">
               <BsBoxSeam size={25} />
             </span>
-            Order history
+            My orders
           </li>
         </Link>
 
@@ -61,7 +61,7 @@ function CustomerNav() {
           }
         >
           <li className="flex flex-row items-center px-[24px] py-[10px] border-b h-[57px]">
-            <span className="mr-4">
+            <span className="mr-6">
               <GoCreditCard size={25} />
             </span>
             Payments
@@ -69,10 +69,14 @@ function CustomerNav() {
         </Link>
         <Link
           to="/customer/returns"
-          className=" text-sm font-normal leading-5 tracking-[0] hover:bg-[#f4f5f6] transition"
+          className={
+            location.pathname === "/customer/returns"
+              ? "text-sm font-semibold leading-5 tracking-[0] hover:bg-[#f4f5f6] transition"
+              : "text-sm font-normal leading-5 tracking-[0] hover:bg-[#f4f5f6] transition"
+          }
         >
           <li className="flex flex-row items-center px-[24px] py-[10px] border-b h-[57px]">
-            <span className="mr-4">
+            <span className="mr-6">
               <FiRefreshCw size={25} />
             </span>
             Returns
