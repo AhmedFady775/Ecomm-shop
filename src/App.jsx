@@ -16,6 +16,10 @@ const Login = lazy(() => import("./Pages/Auth/Login"));
 const Register = lazy(() => import("./Pages/Auth/Register"));
 const Account = lazy(() => import("./Pages/Customer/Account"));
 
+const OrderHistory = lazy(() => import("./Pages/Customer/OrderHistory"));
+const Payments = lazy(() => import("./Pages/Customer/Payments"));
+const Returns = lazy(() => import("./Pages/Customer/Returns"));
+
 import CheckoutRoute from "./components/SecureRoutes/CheckoutRoute";
 
 function App() {
@@ -63,6 +67,9 @@ function App() {
             }
           />
           <Route path="/customer/account" element={<Account />} />
+          <Route path="/customer/myorders" element={<OrderHistory />} />
+          <Route path="/customer/returns" element={<Returns />} />
+          <Route path="/customer/payments" element={<Payments />} />
           <Route path="/products/:id" element={<ProductScreen />} />
         </Routes>
       </Suspense>
