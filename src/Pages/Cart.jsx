@@ -11,6 +11,7 @@ import { TbTruckReturn } from "react-icons/tb";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { AiOutlineHeart } from "react-icons/ai";
+import OrderModal from "../components/OrderModal";
 
 function Cart() {
   const navigate = useNavigate();

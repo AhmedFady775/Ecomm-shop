@@ -103,7 +103,7 @@ function Navbar() {
                   </div>
                 </AccordionSummary>
                 <AccordionDetails onClick={toggleDrawer(false)}>
-                  <Link to="/user/profile">
+                  <Link to="/customer/account">
                     <MenuItem sx={{ py: 1.5 }}>
                       <ListItemIcon>
                         <RxPerson size={22} />
@@ -310,7 +310,7 @@ function Navbar() {
                       vertical: "bottom",
                     }}
                   >
-                    <Link to="/user/profile">
+                    <Link to="/customer/account" onClick={handleClose}>
                       <MenuItem sx={{ py: 1.5 }}>
                         <ListItemIcon>
                           <PersonIcon fontSize="small" />

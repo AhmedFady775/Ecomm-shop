@@ -14,7 +14,7 @@ const ProductScreen = lazy(() => import("./Pages/ProductScreen"));
 const Checkout = lazy(() => import("./Pages/Checkout/Checkout"));
 const Login = lazy(() => import("./Pages/Auth/Login"));
 const Register = lazy(() => import("./Pages/Auth/Register"));
-const OrderScreen = lazy(() => import("./Pages/OrderScreen"));
+const Account = lazy(() => import("./Pages/Customer/Account"));
 
 function App() {
   const location = useLocation();
@@ -25,13 +25,16 @@ function App() {
     location.pathname === "/register"
   ) {
     return (
-      <Suspense fallback={<LinearProgress />} fallbackMinDurationMs={1500}>
-        <Routes>
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-      </Suspense>
+      <div>
+        <Suspense fallback={<LinearProgress />} fallbackMinDurationMs={1500}>
+          <Routes>
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </Suspense>
+        <ToastContainer position="bottom-center" limit={1} autoClose={2000} />
+      </div>
     );
   }
 
@@ -40,7 +43,6 @@ function App() {
       <Suspense fallback={<LinearProgress />} fallbackMinDurationMs={1500}>
         <Navbar />
         <Routes>
-          <Route path="/order/:id" element={<OrderScreen />}></Route>
           <Route path="/cart" element={<Cart />} />
           <Route path="/" element={<Shop />} />
           <Route
@@ -51,7 +53,7 @@ function App() {
               </h1>
             }
           />
-          {/* <Route path="/products/:type" element={<Product />} /> */}
+          <Route path="/customer/account" element={<Account />} />
           <Route path="/products/:id" element={<ProductScreen />} />
         </Routes>
       </Suspense>

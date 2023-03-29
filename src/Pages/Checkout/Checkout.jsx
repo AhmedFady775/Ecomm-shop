@@ -10,6 +10,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import { Store } from "../../redux/Store";
 import { toast } from "react-toastify";
+import OrderModal from "../../components/OrderModal";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -35,6 +36,8 @@ function Checkout() {
     loading: false,
   });
 
+  const [formId, setformId] = useState(" ");
+  const [formchecked, setformchecked] = useState(false);
   const [fullName, setFullName] = useState(shippingAddress.fullName || "");
   const [address, setAddress] = useState(shippingAddress.address || "");
   const [city, setCity] = useState(shippingAddress.city || "");
@@ -66,12 +69,12 @@ function Checkout() {
           },
         }
       );
-
       ctxDispatch({ type: "CART_CLEAR" });
       dispatch({ type: "CREATE_SUCCESS" });
-      localStorage.removeItem("cartItems");
-      navigate(`/order/${data.order._id}`);
+      setformId(data.order._id);
+      setformchecked(true);
       toast.success("your order successfully been placed.");
+      localStorage.removeItem("cartItems");
     } catch (err) {
       dispatch({ type: "CREATE_FAIL" });
       console.log(err);
@@ -263,8 +266,9 @@ function Checkout() {
   );
 
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col">
       <CheckoutNav />
+      {formchecked && <OrderModal id={formId} />}
       <section className="flex flex-col lg:flex-row lg:w-max-[1184px] lg:w-[1184px] lg:m-auto pt-[60px] lg:pt-6 lg:px-0 bg-[#f4f5f6] lg:bg-white">
         <div className="flex flex-col lg:w-[60%] lg:mr-6 shadow lg:rounded bg-white h-fit">
           {paymentMethodFormchecked ? (
