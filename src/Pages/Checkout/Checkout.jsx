@@ -45,41 +45,6 @@ function Checkout() {
   const [submitDeliveryDetailschecked, setsubmitDeliveryDetailschecked] =
     useState(false);
 
-  const submitDeliveryDetailsForm = (e) => {
-    e.preventDefault();
-    ctxDispatch({
-      type: "SAVE_PAYMENT_METHOD",
-      payload: {
-        fullName,
-        address,
-        city,
-        postalCode,
-        country,
-      },
-    });
-    localStorage.setItem(
-      "shippingAddress",
-      JSON.stringify({
-        fullName,
-        address,
-        city,
-        postalCode,
-        country,
-      })
-    );
-    setsubmitDeliveryDetailschecked(true);
-  };
-
-  const [paymentMethodName, setPaymentMethod] = useState("Delivery");
-  const [paymentMethodFormchecked, setpaymentMethodFormchecked] =
-    useState(false);
-  const submitpaymentMethodForm = (e) => {
-    e.preventDefault();
-    ctxDispatch({ type: "SAVE_PAYMENT_METHOD", payload: paymentMethodName });
-    localStorage.setItem("paymentMethod", paymentMethodName);
-    setpaymentMethodFormchecked(true);
-  };
-
   const placeOrderHandler = async (e) => {
     e.preventDefault();
     try {
@@ -111,6 +76,41 @@ function Checkout() {
       dispatch({ type: "CREATE_FAIL" });
       console.log(err);
     }
+  };
+
+  const submitDeliveryDetailsForm = (e) => {
+    e.preventDefault();
+    ctxDispatch({
+      type: "SAVE_SHIPPING_ADDRESS",
+      payload: {
+        fullName,
+        address,
+        city,
+        postalCode,
+        country,
+      },
+    });
+    localStorage.setItem(
+      "shippingAddress",
+      JSON.stringify({
+        fullName,
+        address,
+        city,
+        postalCode,
+        country,
+      })
+    );
+    setsubmitDeliveryDetailschecked(true);
+  };
+
+  const [paymentMethodName, setPaymentMethod] = useState("Delivery");
+  const [paymentMethodFormchecked, setpaymentMethodFormchecked] =
+    useState(false);
+  const submitpaymentMethodForm = (e) => {
+    e.preventDefault();
+    ctxDispatch({ type: "SAVE_PAYMENT_METHOD", payload: paymentMethodName });
+    localStorage.setItem("paymentMethod", paymentMethodName);
+    setpaymentMethodFormchecked(true);
   };
 
   const paymentMethodForm = () => (
@@ -177,6 +177,8 @@ function Checkout() {
       </form>
     </div>
   );
+
+  console.log(shippingAddress);
 
   const deliveryDetailsForm = () => (
     <div className="flex flex-col px-6 h-fit pb-4 ">
