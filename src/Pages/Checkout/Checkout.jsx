@@ -69,12 +69,10 @@ function Checkout() {
           },
         }
       );
-      ctxDispatch({ type: "CART_CLEAR" });
       dispatch({ type: "CREATE_SUCCESS" });
       setformId(data.order._id);
       setformchecked(true);
       toast.success("your order successfully been placed.");
-      localStorage.removeItem("cartItems");
     } catch (err) {
       dispatch({ type: "CREATE_FAIL" });
       console.log(err);

@@ -11,11 +11,13 @@ import { Link } from "react-router-dom";
 
 export default function OrderModal(props) {
   const navigate = useNavigate();
-  const { state } = useContext(Store);
+  const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
   const [open, setOpen] = React.useState(true);
   const handleClose = () => {
     setOpen(false);
+    ctxDispatch({ type: "CART_CLEAR" });
+    localStorage.removeItem("cartItems");
   };
 
   const id = props.id;
@@ -40,7 +42,7 @@ export default function OrderModal(props) {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <div className="flex flex-col lg:w-max-[1100px] lg:w-[1100px] m-4 bg-[#f4f5f6] lg:bg-white">
+      <div className="flex flex-col lg:w-max-[1150px] lg:w-[1150px] m-4 bg-[#f4f5f6] lg:bg-white">
         {isLoading ? (
           <div className="flex justify-center pt-36">
             <CircularProgress color="inherit" />
