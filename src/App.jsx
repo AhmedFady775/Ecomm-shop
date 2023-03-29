@@ -16,6 +16,8 @@ const Login = lazy(() => import("./Pages/Auth/Login"));
 const Register = lazy(() => import("./Pages/Auth/Register"));
 const Account = lazy(() => import("./Pages/Customer/Account"));
 
+import ChechoutRoute from "./components/SecureRoutes/ChechoutRoute";
+
 function App() {
   const location = useLocation();
 
@@ -28,7 +30,14 @@ function App() {
       <div>
         <Suspense fallback={<LinearProgress />} fallbackMinDurationMs={1500}>
           <Routes>
-            <Route path="/checkout" element={<Checkout />} />
+            <Route
+              path="/checkout"
+              element={
+                <ChechoutRoute>
+                  <Checkout />
+                </ChechoutRoute>
+              }
+            />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>

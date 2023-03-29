@@ -10,33 +10,33 @@ function CustomerNav() {
           className=" text-sm font-normal leading-5 tracking-[0] hover:bg-[#f4f5f6]"
         >
           <li className="flex flex-row items-center justify-between px-[24px] py-[10px] border-b h-[57px]">
-            Account Details
+            Account details
           </li>
         </Link>
 
         <Link
-          to="/customer/account"
+          to="/customer/orderhistory"
           className=" text-sm font-normal leading-5 tracking-[0] hover:bg-[#f4f5f6]"
         >
           <li className="flex flex-row items-center justify-between px-[24px] py-[10px] border-b h-[57px]">
-            Account Details
+            Order history
           </li>
         </Link>
 
         <Link
-          to="/customer/account"
+          to="/customer/payments"
           className="text-sm font-normal leading-5 tracking-[0] hover:bg-[#f4f5f6]"
         >
           <li className="flex flex-row items-center justify-between px-[24px] py-[10px] border-b h-[57px]">
-            Account Details
+            Payments
           </li>
         </Link>
         <Link
-          to="/customer/account"
+          to="/customer/returns"
           className=" text-sm font-normal leading-5 tracking-[0] hover:bg-[#f4f5f6]"
         >
           <li className="flex flex-row items-center justify-between px-[24px] py-[10px] border-b h-[57px]">
-            Account Details
+            Returns
           </li>
         </Link>
       </ul>
