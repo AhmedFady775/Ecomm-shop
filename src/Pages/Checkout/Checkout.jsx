@@ -266,7 +266,7 @@ function Checkout() {
   return (
     <div className="flex flex-col">
       <CheckoutNav />
-      {formchecked && <OrderModal id={formId} />}
+      {formchecked && <OrderModal id={formId} nav="/" open={true} />}
       <section className="flex flex-col lg:flex-row lg:w-max-[1184px] lg:w-[1184px] lg:m-auto pt-[60px] lg:pt-6 lg:px-0 bg-[#f4f5f6] lg:bg-white">
         <div className="flex flex-col lg:w-[60%] lg:mr-6 shadow lg:rounded bg-white h-fit">
           {paymentMethodFormchecked ? (
