@@ -32,7 +32,7 @@ function OrderHistory() {
     <div>
       <div className="flex flex-col lg:flex-row lg:w-max-[1184px] lg:w-[1184px] lg:mx-auto pt-[60px] lg:py-4 lg:px-0 bg-[#f4f5f6] lg:bg-white">
         <CustomerNav />
-        <div className="flex flex-col lg:w-[70%] shadow lg:rounded bg-white min-h-[600px]">
+        <div className="flex flex-col lg:w-[70%] shadow lg:rounded bg-white ">
           <p className="text-[1.15rem] font-semibold leading-6 tracking-[-1px] py-[26px] px-6">
             My orders
           </p>
@@ -51,7 +51,7 @@ function OrderHistory() {
               </p>
             </div>
           ) : (
-            <div className="flex flex-col">
+            <div className="flex flex-col min-h-[400px]">
               <ul className="flex flex-row justify-between px-6 border-y py-4 font-semibold leading-[1.8rem] tracking-[-1px] items-center">
                 <li className="w-[10%]">Order ID</li>
                 <li className="w-[15%]">Date </li>
