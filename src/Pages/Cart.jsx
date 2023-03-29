@@ -33,7 +33,7 @@ function Cart() {
   };
 
   const checkoutHandler = () => {
-    navigate("/signin?redirect=/checkout");
+    navigate("/login?redirect=/checkout");
   };
 
   // const controlItem = (item, quantity) => (
