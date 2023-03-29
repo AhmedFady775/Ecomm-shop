@@ -232,7 +232,6 @@ function Navbar() {
               anchorEl={anchorEl1}
               open={openDrop1}
               onClose={handleClose1}
-              onClick={handleClose1}
               PaperProps={{
                 elevation: 3,
                 sx: {
@@ -242,15 +241,15 @@ function Navbar() {
                 },
               }}
             >
-              <Link to="/products/camera">
+              <Link onClick={handleClose1} to="/products/camera">
                 <MenuItem sx={{ py: 1.5 }}>Cameras</MenuItem>
               </Link>
 
-              <Link to="/">
+              <Link onClick={handleClose1} to="/">
                 <MenuItem sx={{ py: 1.5 }}>Wires</MenuItem>
               </Link>
 
-              <Link to="/">
+              <Link onClick={handleClose1} to="/">
                 <MenuItem sx={{ py: 1.5 }}>Devices</MenuItem>
               </Link>
             </Menu>
@@ -279,7 +278,6 @@ function Navbar() {
                     anchorEl={anchorEl}
                     open={openDrop}
                     onClose={handleClose}
-                    onClick={handleClose}
                     PaperProps={{
                       elevation: 0,
                       sx: {
@@ -310,7 +308,7 @@ function Navbar() {
                       vertical: "bottom",
                     }}
                   >
-                    <Link to="/customer/account" onClick={handleClose}>
+                    <Link onClick={handleClose} to="/customer/account">
                       <MenuItem sx={{ py: 1.5 }}>
                         <ListItemIcon>
                           <PersonIcon fontSize="small" />
@@ -319,7 +317,7 @@ function Navbar() {
                       </MenuItem>
                     </Link>
 
-                    <Link to="/user/ordershistory">
+                    <Link onClick={handleClose} to="/customer/myorders">
                       <MenuItem sx={{ py: 1.5 }}>
                         <ListItemIcon>
                           <AssignmentIcon fontSize="small" />
@@ -328,7 +326,7 @@ function Navbar() {
                       </MenuItem>
                     </Link>
 
-                    <Link to="/user/payments">
+                    <Link onClick={handleClose} to="/customer/payments">
                       <MenuItem sx={{ py: 1.5 }}>
                         <ListItemIcon>
                           <CreditCardIcon fontSize="small" />
@@ -337,7 +335,7 @@ function Navbar() {
                       </MenuItem>
                     </Link>
 
-                    <Link to="/user/returns">
+                    <Link onClick={handleClose} to="/customer/returns">
                       <MenuItem sx={{ py: 1.5 }}>
                         <ListItemIcon>
                           <AssignmentReturnIcon fontSize="small" />
@@ -349,7 +347,7 @@ function Navbar() {
                     <Divider />
 
                     {userInfo && userInfo.isAdmin ? (
-                      <Link to="/admin/dashboard">
+                      <Link onClick={handleClose} to="/admin/dashboard">
                         <MenuItem sx={{ py: 1.5 }}>
                           <ListItemIcon>
                             <AdminPanelSettingsIcon fontSize="small" />
