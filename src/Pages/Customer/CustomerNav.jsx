@@ -28,8 +28,8 @@ function CustomerNav() {
             to="/customer/account"
             className={
               location.pathname === "/customer/account"
-                ? "text-sm font-semibold leading-5 tracking-[0] hover:bg-[#f4f5f6] transition"
-                : "text-sm font-normal leading-5 tracking-[0] hover:bg-[#f4f5f6] transition"
+                ? "text-sm font-semibold leading-5 tracking-[0] lg:hover:bg-[#f4f5f6] transition"
+                : "text-sm font-normal leading-5 tracking-[0] lg:hover:bg-[#f4f5f6] transition"
             }
           >
             <li className="flex flex-row items-center px-[24px] py-[10px] border-b h-[57px] ">
@@ -44,8 +44,8 @@ function CustomerNav() {
             to="/customer/myorders"
             className={
               location.pathname === "/customer/myorders"
-                ? "text-sm font-semibold leading-5 tracking-[0] hover:bg-[#f4f5f6] transition"
-                : "text-sm font-normal leading-5 tracking-[0] hover:bg-[#f4f5f6] transition"
+                ? "text-sm font-semibold leading-5 tracking-[0] lg:hover:bg-[#f4f5f6] transition"
+                : "text-sm font-normal leading-5 tracking-[0] lg:hover:bg-[#f4f5f6] transition"
             }
           >
             <li className="flex flex-row items-center px-[24px] py-[10px] border-b h-[57px]">
@@ -60,8 +60,8 @@ function CustomerNav() {
             to="/customer/payments"
             className={
               location.pathname === "/customer/payments"
-                ? "text-sm font-semibold leading-5 tracking-[0] hover:bg-[#f4f5f6] transition"
-                : "text-sm font-normal leading-5 tracking-[0] hover:bg-[#f4f5f6] transition"
+                ? "text-sm font-semibold leading-5 tracking-[0] lg:hover:bg-[#f4f5f6] transition"
+                : "text-sm font-normal leading-5 tracking-[0] lg:hover:bg-[#f4f5f6] transition"
             }
           >
             <li className="flex flex-row items-center px-[24px] py-[10px] border-b h-[57px]">
@@ -75,8 +75,8 @@ function CustomerNav() {
             to="/customer/returns"
             className={
               location.pathname === "/customer/returns"
-                ? "text-sm font-semibold leading-5 tracking-[0] hover:bg-[#f4f5f6] transition"
-                : "text-sm font-normal leading-5 tracking-[0] hover:bg-[#f4f5f6] transition"
+                ? "text-sm font-semibold leading-5 tracking-[0] lg:hover:bg-[#f4f5f6] transition"
+                : "text-sm font-normal leading-5 tracking-[0] lg:hover:bg-[#f4f5f6] transition"
             }
           >
             <li className="flex flex-row items-center px-[24px] py-[10px] border-b h-[57px]">
@@ -88,7 +88,7 @@ function CustomerNav() {
           </Link> */}
           <li
             onClick={signoutHandler}
-            className="flex flex-row cursor-pointer items-center px-[24px] py-[10px] border-b h-[57px] text-sm font-normal leading-5 tracking-[0] text-[#0066be] hover:bg-[#f4f5f6] transition"
+            className="flex flex-row cursor-pointer items-center px-[24px] py-[10px] border-b h-[57px] text-sm font-normal leading-5 tracking-[0] text-[#0066be] lg:hover:bg-[#f4f5f6] transition"
           >
             Logout
           </li>
