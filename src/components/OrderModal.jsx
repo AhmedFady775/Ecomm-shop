@@ -16,6 +16,10 @@ export default function OrderModal(props) {
   const [open, setOpen] = React.useState(props.open);
   const renderButton = props.render;
 
+  const handleClose1 = () => {
+    setOpen(false);
+  };
+
   const handleClose = () => {
     setOpen(false);
     ctxDispatch({ type: "CART_CLEAR" });
@@ -55,14 +59,14 @@ export default function OrderModal(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <div className="flex flex-col lg:w-max-[1150px] lg:w-[1150px] m-4 bg-[#f4f5f6] lg:bg-white">
+        <div className="flex flex-col lg:w-max-[728px] lg:w-[728px] m-4">
           {isLoading ? (
-            <div className="flex justify-center pt-36">
+            <div className="flex justify-center p-36">
               <CircularProgress color="inherit" />
             </div>
           ) : (
             <div className="flex flex-col lg:flex-row">
-              <div className="flex flex-col p-4 lg:rounded shadow lg:w-[70%] h-fit lg:mr-4 bg-white">
+              <div className="flex flex-col lg:p-4 lg:rounded lg:shadow w-full h-fit lg:mr-4 bg-white">
                 <p className="py-4 border-b">
                   <strong className="text-lg">Order receipt</strong>
                 </p>
@@ -104,11 +108,11 @@ export default function OrderModal(props) {
                           <div className="orderItemPart">
                             <Link
                               className="text-blue-400 underline"
-                              to={`/${order._id}`}
+                              to={`/products/${order._id}`}
                             >
                               <div className="p-2">
                                 <img
-                                  className="w-16 h-12 object-cover"
+                                  className="w-16 h-12 object-contain"
                                   src={order.image}
                                   alt={order.name}
                                 ></img>
@@ -118,7 +122,7 @@ export default function OrderModal(props) {
                           <div className="orderItemPart">
                             <Link
                               className="text-blue-400 underline"
-                              to={`/${order._id}`}
+                              to={`/products/${order._id}`}
                             >
                               {order.name}
                             </Link>
@@ -153,7 +157,7 @@ export default function OrderModal(props) {
                   </div>
                 </div>
               </div>
-              <div className="hidden lg:flex flex-col p-4 rounded shadow lg:w-[30%] h-fit items-center text-center text-lg font-semibold">
+              {/* <div className="hidden lg:flex flex-col p-4 rounded shadow lg:w-[30%] h-fit items-center text-center text-lg font-semibold">
                 <span className="border-4 border-solid border-[#009f29] text-[#009f29] rounded-[50%] w-[56px] h-[56px] flex items-center justify-center mb-4 ">
                   <MdDone size={40} />
                 </span>
@@ -162,7 +166,7 @@ export default function OrderModal(props) {
                   <br />
                   been placed.
                 </div>
-              </div>
+              </div> */}
             </div>
           )}
         </div>

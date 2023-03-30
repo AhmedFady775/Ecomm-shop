@@ -11,7 +11,6 @@ import { TbTruckReturn } from "react-icons/tb";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { AiOutlineHeart } from "react-icons/ai";
-import OrderModal from "../components/OrderModal";
 
 function Cart() {
   const navigate = useNavigate();
@@ -80,7 +79,7 @@ function Cart() {
     <div className="flex flex-col py-6 px-4 border-b" key={item.id}>
       <div className="flex flex-row">
         <div className="flex flex-col pr-3">
-          <Link className="h-[72px] w-[72px]" to={`/${item._id}`}>
+          <Link className="h-[72px] w-[72px]" to={`/products/${item._id}`}>
             <img
               src={item.image}
               alt={item.name}

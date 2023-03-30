@@ -111,7 +111,7 @@ function Navbar() {
                       Profile
                     </MenuItem>
                   </Link>
-                  <Link to="/user/ordershistory">
+                  <Link to="/customer/myorders">
                     <MenuItem sx={{ py: 1.5 }}>
                       <ListItemIcon>
                         <AssignmentIcon fontSize="small" />
@@ -119,7 +119,7 @@ function Navbar() {
                       Orders
                     </MenuItem>
                   </Link>
-                  <Link to="/user/payments">
+                  <Link to="/customer/payments">
                     <MenuItem sx={{ py: 1.5 }}>
                       <ListItemIcon>
                         <CreditCardIcon fontSize="small" />
@@ -127,7 +127,7 @@ function Navbar() {
                       Payments
                     </MenuItem>
                   </Link>
-                  <Link to="/user/returns">
+                  <Link to="/customer/returns">
                     <MenuItem sx={{ py: 1.5 }}>
                       <ListItemIcon>
                         <AssignmentReturnIcon fontSize="small" />

@@ -82,6 +82,7 @@ body {
   justify-content: space-around;
   margin: 1rem 0rem;
   width: 100%;
+  @apply text-xs lg:text-sm;
 }
 
 .wholeOrderItem .orderItemPart {
