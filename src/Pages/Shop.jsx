@@ -33,6 +33,11 @@ const Shop = () => {
     setOpen(newOpen);
   };
 
+  const [open1, setOpen1] = useState(false);
+  const toggleDrawer1 = (newOpen) => () => {
+    setOpen1(newOpen);
+  };
+
   const [sortPrice, setSortPrice] = useState("");
   const [order, setOrder] = useState("featured");
   const [brand, setBrand] = useState("all");
@@ -63,11 +68,8 @@ const Shop = () => {
   });
 
   const breadcrumbs = [
-    <Link key="1" color="inherit" to="/">
+    <strong key="1" color="text.primary">
       Home
-    </Link>,
-    <strong key="2" color="text.primary">
-      Cameras
     </strong>,
   ];
 
@@ -127,6 +129,22 @@ const Shop = () => {
     </FormGroup>
   );
 
+  const filterMenu = () => (
+    <FormGroup onClick={toggleDrawer(false)} className="m-4">
+      <p
+        className="text-[#0066be] cursor-pointer font-medium"
+        onClick={() => setBrand(" ")}
+      >
+        clear
+      </p>
+      <RadioGroup value={brand} onChange={handleBrandChange}>
+        {brands?.map((brand) => (
+          <FormControlLabel value={brand} control={<Radio />} label={brand} />
+        ))}
+      </RadioGroup>
+    </FormGroup>
+  );
+
   const sortMenu = () => (
     <p
       onClick={toggleDrawer(false)}
@@ -135,19 +153,28 @@ const Shop = () => {
       Sort by:
       <button
         className="border w-fit p-2 rounded-full "
-        onClick={() => setOrder("lowest")}
+        onClick={() => {
+          setOrder("lowest");
+          setPage(1);
+        }}
       >
         Price: low to high
       </button>
       <button
         className="border w-fit p-2 rounded-full  "
-        onClick={() => setOrder("highest")}
+        onClick={() => {
+          setOrder("highest");
+          setPage(1);
+        }}
       >
         Price: high to low
       </button>
       <button
         className="border w-fit p-2 rounded-full "
-        onClick={() => setOrder("newest")}
+        onClick={() => {
+          setOrder("newest");
+          setPage(1);
+        }}
       >
         Latest realease
       </button>
@@ -158,10 +185,14 @@ const Shop = () => {
     <ul className="flex text-xs h-10 items-center font-semibold flex-row border-b border-gray-200">
       <li
         key={0}
+        onClick={toggleDrawer1(true)}
         className="flex h-full justify-center items-center w-[40%] border-r border-gray-200"
       >
         <CiSliderHorizontal size={15} className="mr-2" /> Filter by
       </li>
+      <Drawer open={open1} anchor="bottom" onClose={toggleDrawer1(false)}>
+        {filterMenu()}
+      </Drawer>
       <li
         key={1}
         onClick={toggleDrawer(true)}

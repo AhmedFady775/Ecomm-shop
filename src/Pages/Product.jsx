@@ -63,7 +63,7 @@ const Product = () => {
       Home
     </Link>,
     <strong key="2" color="text.primary">
-      Cameras
+      {categoryName}s
     </strong>,
   ];
 
