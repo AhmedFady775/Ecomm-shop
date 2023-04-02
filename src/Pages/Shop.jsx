@@ -41,7 +41,6 @@ const Shop = () => {
   const [sortPrice, setSortPrice] = useState("");
   const [order, setOrder] = useState("featured");
   const [brand, setBrand] = useState("all");
-  const [category, setCategory] = useState("all");
 
   const handleBrandChange = (e) => {
     setBrand(e.target.value);
@@ -49,22 +48,14 @@ const Shop = () => {
 
   async function fetchPosts() {
     const { data } = await axios.get(
-      `https://ecomm12.herokuapp.com/products?page=${page}&category=${category}&order=${order}&brand=${brand}`
+      `https://ecomm12.herokuapp.com/products?page=${page}&category=all&order=${order}&brand=${brand}`
     );
     return data;
   }
 
   const { isLoading, data: products } = useQuery({
-    queryKey: ["repoData", { page, sortPrice, brand, category, order }],
+    queryKey: ["repoData", { page, sortPrice, brand, order }],
     queryFn: fetchPosts,
-  });
-
-  const { data: brands } = useQuery({
-    queryKey: ["brands"],
-    queryFn: () =>
-      axios
-        .get("https://ecomm12.herokuapp.com/products/brands")
-        .then((res) => res.data),
   });
 
   const breadcrumbs = [
@@ -115,7 +106,7 @@ const Shop = () => {
         clear
       </p>
       <RadioGroup value={brand} onChange={handleBrandChange}>
-        {brands?.map((brand) => (
+        {products?.brands.map((brand) => (
           <FormControlLabel value={brand} control={<Radio />} label={brand} />
         ))}
       </RadioGroup>

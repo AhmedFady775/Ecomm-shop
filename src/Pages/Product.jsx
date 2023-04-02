@@ -12,7 +12,7 @@ import FormGroup from "@mui/material/FormGroup";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import { useParams } from "react-router-dom";
-
+import { Drawer } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
@@ -28,6 +28,16 @@ const Product = () => {
   const [page, setPage] = useState(1);
   const handleChange = (event, value) => {
     setPage(value);
+  };
+
+  const [open, setOpen] = useState(false);
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
+
+  const [open1, setOpen1] = useState(false);
+  const toggleDrawer1 = (newOpen) => () => {
+    setOpen1(newOpen);
   };
 
   const [sortPrice, setSortPrice] = useState("");
@@ -48,14 +58,6 @@ const Product = () => {
   const { isLoading, data: products } = useQuery({
     queryKey: ["repoData", { page, sortPrice, brand, category, order }],
     queryFn: fetchPosts,
-  });
-
-  const { data: brands } = useQuery({
-    queryKey: ["categories"],
-    queryFn: () =>
-      axios
-        .get("https://ecomm12.herokuapp.com/products/brands")
-        .then((res) => res.data),
   });
 
   const breadcrumbs = [
@@ -109,7 +111,7 @@ const Product = () => {
         clear
       </p>
       <RadioGroup value={brand} onChange={handleBrandChange}>
-        {brands?.map((brand) => (
+        {products?.brands.map((brand) => (
           <FormControlLabel value={brand} control={<Radio />} label={brand} />
         ))}
       </RadioGroup>
@@ -123,21 +125,81 @@ const Product = () => {
     </FormGroup>
   );
 
+  const filterMenu = () => (
+    <FormGroup onClick={toggleDrawer(false)} className="m-4">
+      <p
+        className="text-[#0066be] cursor-pointer font-medium"
+        onClick={() => setBrand(" ")}
+      >
+        clear
+      </p>
+      <RadioGroup value={brand} onChange={handleBrandChange}>
+        {brands?.map((brand) => (
+          <FormControlLabel value={brand} control={<Radio />} label={brand} />
+        ))}
+      </RadioGroup>
+    </FormGroup>
+  );
+
+  const sortMenu = () => (
+    <p
+      onClick={toggleDrawer(false)}
+      className="flex flex-col py-[26px] px-[24px] border-b text-sm font-semibold leading-5 tracking-[0] border-gray-200 gap-4"
+    >
+      Sort by:
+      <button
+        className="border w-fit p-2 rounded-full "
+        onClick={() => {
+          setOrder("lowest");
+          setPage(1);
+        }}
+      >
+        Price: low to high
+      </button>
+      <button
+        className="border w-fit p-2 rounded-full  "
+        onClick={() => {
+          setOrder("highest");
+          setPage(1);
+        }}
+      >
+        Price: high to low
+      </button>
+      <button
+        className="border w-fit p-2 rounded-full "
+        onClick={() => {
+          setOrder("newest");
+          setPage(1);
+        }}
+      >
+        Latest realease
+      </button>
+    </p>
+  );
+
   const filtermob = () => (
     <ul className="flex text-xs h-10 items-center font-semibold flex-row border-b border-gray-200">
       <li
         key={0}
+        onClick={toggleDrawer1(true)}
         className="flex h-full justify-center items-center w-[40%] border-r border-gray-200"
       >
         <CiSliderHorizontal size={15} className="mr-2" /> Filter by
       </li>
+      <Drawer open={open1} anchor="bottom" onClose={toggleDrawer1(false)}>
+        {filterMenu()}
+      </Drawer>
       <li
         key={1}
+        onClick={toggleDrawer(true)}
         className="flex h-full justify-center items-center w-[40%] border-r border-gray-200"
       >
         <BsSortAlphaDown size={15} className="mr-2" />
         Sort
       </li>
+      <Drawer open={open} anchor="bottom" onClose={toggleDrawer(false)}>
+        {sortMenu()}
+      </Drawer>
       <li
         key={2}
         onClick={handleGrid}
