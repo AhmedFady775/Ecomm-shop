@@ -38,8 +38,6 @@ const Product = () => {
     setBrand(e.target.value);
   };
 
-  console.log(brand);
-
   async function fetchPosts() {
     const { data } = await axios.get(
       `https://ecomm12.herokuapp.com/products?page=${page}&category=${category}&order=${order}&brand=${brand}`
@@ -185,8 +183,6 @@ const Product = () => {
       </li> */}
     </ul>
   );
-
-  console.log(sortPrice);
 
   return (
     <div className="flex flex-col  lg:py-0 lg:px-0 lg:w-max-[1184px] lg:w-[1184px] lg:m-auto min-h-screen">
