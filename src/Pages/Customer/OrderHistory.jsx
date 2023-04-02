@@ -23,6 +23,10 @@ function OrderHistory() {
         .then((res) => res.data),
   });
 
+  const handleClose = (setOpen) => {
+    setOpen(false);
+  };
+
   return (
     <div>
       <div className="flex flex-col lg:flex-row lg:w-max-[1184px] lg:w-[1184px] lg:mx-auto pt-[60px] lg:py-4 lg:px-0 bg-[#f4f5f6] lg:bg-white">
@@ -123,7 +127,12 @@ function OrderHistory() {
                       {order.totalPrice.toFixed(2)} EGP
                     </li>
                     <li className="lg:w-[15%] flex flex-row items-center mt-2">
-                      <OrderModal id={order._id} render={true} open={false} />
+                      <OrderModal
+                        id={order._id}
+                        render={true}
+                        open={false}
+                        closeFnc={handleClose}
+                      />
                     </li>
                   </ul>
                 ))}

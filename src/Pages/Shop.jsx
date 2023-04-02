@@ -9,7 +9,9 @@ import axios from "axios";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
-import Checkbox from "@mui/material/Checkbox";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import { Drawer } from "@mui/material";
 
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -26,19 +28,39 @@ const Shop = () => {
     setPage(value);
   };
 
+  const [open, setOpen] = useState(false);
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
+
+  const [sortPrice, setSortPrice] = useState("");
+  const [order, setOrder] = useState("featured");
+  const [brand, setBrand] = useState("all");
+  const [category, setCategory] = useState("all");
+
+  const handleBrandChange = (e) => {
+    setBrand(e.target.value);
+  };
+
+  console.log(brand);
+
+  async function fetchPosts() {
+    const { data } = await axios.get(
+      `http://localhost:3001/products?page=${page}&category=${category}&order=${order}&brand=${brand}`
+    );
+    return data;
+  }
+
   const { isLoading, data: products } = useQuery({
-    queryKey: ["repoData", { page }],
-    queryFn: () =>
-      axios
-        .get(`https://ecomm12.herokuapp.com/products?page=${page}`)
-        .then((res) => res.data),
+    queryKey: ["repoData", { page, sortPrice, brand, category, order }],
+    queryFn: fetchPosts,
   });
 
-  const { data: allProducts } = useQuery({
-    queryKey: ["allData"],
+  const { data: brands } = useQuery({
+    queryKey: ["brands"],
     queryFn: () =>
       axios
-        .get("https://ecomm12.herokuapp.com/products/allproducts")
+        .get("http://localhost:3001/products/brands")
         .then((res) => res.data),
   });
 
@@ -51,9 +73,9 @@ const Shop = () => {
     </strong>,
   ];
 
-  const [openCategory, setOpenCategory] = useState(true);
-  const handleopenCategory = () => {
-    setOpenCategory(!openCategory);
+  const [openbrand, setOpenbrand] = useState(true);
+  const handleopenbrand = () => {
+    setOpenbrand(!openbrand);
   };
 
   const [openPrice, setOpenPrice] = useState(true);
@@ -84,10 +106,19 @@ const Shop = () => {
     </div>
   );
 
-  const CATEGORY = () => (
+  const CATEGORIES = () => (
     <FormGroup className="my-4">
-      <FormControlLabel control={<Checkbox />} label="Label" />
-      <FormControlLabel control={<Checkbox />} label="Label" />
+      <p
+        className="text-[#0066be] cursor-pointer font-medium"
+        onClick={() => setBrand(" ")}
+      >
+        clear
+      </p>
+      <RadioGroup value={brand} onChange={handleBrandChange}>
+        {brands?.map((brand) => (
+          <FormControlLabel value={brand} control={<Radio />} label={brand} />
+        ))}
+      </RadioGroup>
     </FormGroup>
   );
 
@@ -96,6 +127,33 @@ const Shop = () => {
       <FormControlLabel control={<Checkbox />} label="Label" />
       <FormControlLabel control={<Checkbox />} label="Label" />
     </FormGroup>
+  );
+
+  const sortMenu = () => (
+    <p
+      onClick={toggleDrawer(false)}
+      className="flex flex-col py-[26px] px-[24px] border-b text-sm font-semibold leading-5 tracking-[0] border-gray-200 gap-4"
+    >
+      Sort by:
+      <button
+        className="border w-fit p-2 rounded-full "
+        onClick={() => setOrder("lowest")}
+      >
+        Price: low to high
+      </button>
+      <button
+        className="border w-fit p-2 rounded-full  "
+        onClick={() => setOrder("highest")}
+      >
+        Price: high to low
+      </button>
+      <button
+        className="border w-fit p-2 rounded-full "
+        onClick={() => setOrder("newest")}
+      >
+        Latest realease
+      </button>
+    </p>
   );
 
   const filtermob = () => (
@@ -108,11 +166,15 @@ const Shop = () => {
       </li>
       <li
         key={1}
+        onClick={toggleDrawer(true)}
         className="flex h-full justify-center items-center w-[40%] border-r border-gray-200"
       >
         <BsSortAlphaDown size={15} className="mr-2" />
         Sort
       </li>
+      <Drawer open={open} anchor="bottom" onClose={toggleDrawer(false)}>
+        {sortMenu()}
+      </Drawer>
       <li
         key={2}
         onClick={handleGrid}
@@ -127,21 +189,21 @@ const Shop = () => {
     <ul className="flex flex-col text-black mr-6">
       <li key={0} className="flex flex-col py-4 cursor-pointer">
         <div
-          onClick={handleopenCategory}
+          onClick={handleopenbrand}
           className="flex flex-row justify-between w-full text-base font-semibold leading-6 tracking-[0]"
         >
           Brand
-          {openCategory ? (
+          {openbrand ? (
             <RemoveIcon sx={{ fontSize: 20 }} />
           ) : (
             <AddIcon sx={{ fontSize: 20 }} />
           )}
         </div>
 
-        {openCategory ? CATEGORY() : null}
+        {openbrand ? CATEGORIES() : null}
       </li>
 
-      <li className="flex flex-col py-4 cursor-pointer">
+      {/* <li className="flex flex-col py-4 cursor-pointer">
         <div
           onClick={handlopenPrice}
           className="flex flex-row justify-between w-full text-base font-semibold leading-6 tracking-[0]"
@@ -155,9 +217,11 @@ const Shop = () => {
           )}
         </div>
         {openPrice ? PRICE() : null}
-      </li>
+      </li> */}
     </ul>
   );
+
+  console.log(sortPrice);
 
   return (
     <div className="flex flex-col  lg:py-0 lg:px-0 lg:w-max-[1184px] lg:w-[1184px] lg:m-auto min-h-screen">
@@ -189,16 +253,34 @@ const Shop = () => {
           <div className="flex flex-col shadow">
             <section className="flex flex-col  rounded">
               <div className="flex items-center py-[26px] px-[24px] border-b text-[1.15rem] font-semibold leading-6 tracking-[-1px] border-gray-200">
-                Cameras
+                All Products
                 <span className="ml-2 flex text-sm rounded-full items-center py-1 px-3 bg-slate-100">
-                  {allProducts?.count}
+                  {products?.countProducts}
                 </span>
               </div>
               <section className="lg:hidden flex flex-col">
                 {filtermob()}
               </section>
-              <p className="hidden lg:flex py-[26px] px-[24px] border-b text-sm font-semibold leading-5 tracking-[0] border-gray-200">
+              <p className="hidden lg:flex flex-row items-center py-[26px] px-[24px] border-b text-sm font-semibold leading-5 tracking-[0] border-gray-200">
                 Sort by:
+                <button
+                  className="border mx-4 w-fit p-2 rounded-full hover:bg-[#f4f5f6] transition"
+                  onClick={() => setOrder("lowest")}
+                >
+                  Price: low to high
+                </button>
+                <button
+                  className="border w-fit p-2 rounded-full  hover:bg-[#f4f5f6] transition"
+                  onClick={() => setOrder("highest")}
+                >
+                  Price: high to low
+                </button>
+                <button
+                  className="border ml-4 w-fit p-2 rounded-full  hover:bg-[#f4f5f6] transition"
+                  onClick={() => setOrder("newest")}
+                >
+                  Latest realease
+                </button>
               </p>
             </section>
             {isLoading ? (
@@ -208,7 +290,7 @@ const Shop = () => {
             ) : grid ? (
               <>
                 <section className="grid grid-cols-2 lg:grid-cols-3 bg-gray-200 gap-[1px]">
-                  {products.products?.map((data) => (
+                  {products.products.map((data) => (
                     <ProductsCardGrid product={data} key={data.id} />
                   ))}
                 </section>
@@ -216,7 +298,7 @@ const Shop = () => {
             ) : (
               <>
                 <section className="flex flex-col bg-gray-200 gap-[1px]">
-                  {products.products?.map((data) => (
+                  {products.products.map((data) => (
                     <ProductsCardFlex product={data} key={data.id} />
                   ))}
                 </section>
@@ -227,7 +309,7 @@ const Shop = () => {
             <Pagination
               shape="rounded"
               size="large"
-              count={products?.count}
+              count={products?.pages}
               page={page}
               onChange={handleChange}
               onClick={() => window.scrollTo(0, 0)}

@@ -71,9 +71,9 @@ function Navbar() {
   };
 
   const CATEGORIES = [
-    { link: "/", name: "Cameras" },
-    { link: "/", name: "Wires" },
-    { link: "/", name: "Devices" },
+    { link: "/category/camera", name: "Cameras" },
+    { link: "/category/wire", name: "Wires" },
+    { link: "/category/device", name: "Devices" },
   ];
 
   const list = () => (
@@ -241,15 +241,15 @@ function Navbar() {
                 },
               }}
             >
-              <Link onClick={handleClose1} to="/products/camera">
+              <Link onClick={handleClose1} to="/category/camera">
                 <MenuItem sx={{ py: 1.5 }}>Cameras</MenuItem>
               </Link>
 
-              <Link onClick={handleClose1} to="/">
+              <Link onClick={handleClose1} to="/category/wire">
                 <MenuItem sx={{ py: 1.5 }}>Wires</MenuItem>
               </Link>
 
-              <Link onClick={handleClose1} to="/">
+              <Link onClick={handleClose1} to="/category/device">
                 <MenuItem sx={{ py: 1.5 }}>Devices</MenuItem>
               </Link>
             </Menu>

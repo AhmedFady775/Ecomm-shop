@@ -18,13 +18,17 @@ function Payments() {
           <p className="text-[1.15rem] font-semibold leading-6 tracking-[-1px] py-[26px] px-6 border-b">
             My Payments methods
           </p>
-          <p className=" py-[26px] px-6">
-            <span className="text-[1.15rem] font-semibold leading-6 tracking-[-1px]">
-              {paymentMethod} to:
-            </span>{" "}
-            {shippingAddress.address}, {shippingAddress.city},
-            {shippingAddress.postalCode}, {shippingAddress.country}.
-          </p>
+          {paymentMethod ? (
+            <p className="py-[26px] px-6">
+              <span className="text-[1.15rem] font-semibold leading-6 tracking-[-1px]">
+                {paymentMethod} to:
+              </span>{" "}
+              {shippingAddress.address}, {shippingAddress.city},
+              {shippingAddress.postalCode}, {shippingAddress.country}.
+            </p>
+          ) : (
+            <p className="py-[26px] px-6">There are no payment method yet..</p>
+          )}
         </div>
       </div>
     </div>

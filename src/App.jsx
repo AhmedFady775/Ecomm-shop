@@ -7,11 +7,11 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Navbar from "./components/navbar";
-const Shop = lazy(() => import("./Pages/Shop"));
+const Shop = lazy(() => delay(import("./Pages/Shop")));
 const Cart = lazy(() => import("./Pages/Cart"));
 const Product = lazy(() => import("./Pages/Product"));
 const ProductScreen = lazy(() => import("./Pages/ProductScreen"));
-const Checkout = lazy(() => import("./Pages/Checkout/Checkout"));
+const Checkout = lazy(() => delay(import("./Pages/Checkout/Checkout")));
 const Login = lazy(() => import("./Pages/Auth/Login"));
 const Register = lazy(() => import("./Pages/Auth/Register"));
 const Account = lazy(() => import("./Pages/Customer/Account"));
@@ -21,6 +21,12 @@ const Payments = lazy(() => import("./Pages/Customer/Payments"));
 const Returns = lazy(() => import("./Pages/Customer/Returns"));
 
 import CheckoutRoute from "./components/SecureRoutes/CheckoutRoute";
+
+async function delay(promise) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, 1000);
+  }).then(() => promise);
+}
 
 function App() {
   const location = useLocation();
@@ -71,6 +77,7 @@ function App() {
           <Route path="/customer/returns" element={<Returns />} />
           <Route path="/customer/payments" element={<Payments />} />
           <Route path="/products/:id" element={<ProductScreen />} />
+          <Route path="/category/:category" element={<Product />} />
         </Routes>
       </Suspense>
       <ToastContainer position="bottom-center" limit={1} autoClose={2000} />

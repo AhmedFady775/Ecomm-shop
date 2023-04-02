@@ -16,16 +16,7 @@ export default function OrderModal(props) {
   const [open, setOpen] = React.useState(props.open);
   const renderButton = props.render;
 
-  const handleClose1 = () => {
-    setOpen(false);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    ctxDispatch({ type: "CART_CLEAR" });
-    localStorage.removeItem("cartItems");
-  };
-
+  const handleClose = props.closeFnc;
   const id = props.id;
   const { isLoading, data: order } = useQuery({
     queryKey: ["repoData", { id }],
@@ -53,7 +44,7 @@ export default function OrderModal(props) {
         open={open}
         maxWidth={"lg"}
         onClose={() => {
-          handleClose();
+          handleClose(setOpen);
           navigate(props.nav);
         }}
         aria-labelledby="alert-dialog-title"

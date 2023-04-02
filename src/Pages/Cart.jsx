@@ -94,10 +94,7 @@ function Cart() {
             className="flex lg:hidden mt-4 py-4 pr-3 pl-4 rounded-md w-[64px] cursor-pointer border-1 border-gray-300 text-[#0e001a] hover:border-[#0e001a] focus:ring-[#0e001a] focus:border-transparent"
           >
             {[...Array(item.countInStock)].map((_, i) => (
-              <option
-                onClick={() => updateCartHandler(item, i + 1)}
-                value={i + 1}
-              >
+              <option key={i + 1} value={i + 1}>
                 {i + 1}
               </option>
             ))}
