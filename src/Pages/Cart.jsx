@@ -16,6 +16,7 @@ function Cart() {
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
+    userInfo,
     cart: { cartItems },
   } = state;
 
@@ -33,7 +34,9 @@ function Cart() {
   };
 
   const checkoutHandler = () => {
-    navigate("/login?redirect=/checkout");
+    {
+      userInfo ? navigate("/checkout") : navigate("/login?redirect=/checkout");
+    }
   };
 
   // const controlItem = (item, quantity) => (
