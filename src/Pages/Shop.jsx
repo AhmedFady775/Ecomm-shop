@@ -129,7 +129,7 @@ const Shop = () => {
         clear
       </p>
       <RadioGroup value={brand} onChange={handleBrandChange}>
-        {brands?.map((brand) => (
+        {products?.brands.map((brand) => (
           <FormControlLabel value={brand} control={<Radio />} label={brand} />
         ))}
       </RadioGroup>
