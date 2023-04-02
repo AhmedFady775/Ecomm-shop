@@ -42,7 +42,7 @@ const Product = () => {
 
   async function fetchPosts() {
     const { data } = await axios.get(
-      `http://localhost:3001/products?page=${page}&category=${category}&order=${order}&brand=${brand}`
+      `https://ecomm12.herokuapp.com/products?page=${page}&category=${category}&order=${order}&brand=${brand}`
     );
     return data;
   }
@@ -56,7 +56,7 @@ const Product = () => {
     queryKey: ["categories"],
     queryFn: () =>
       axios
-        .get("http://localhost:3001/products/brands")
+        .get("https://ecomm12.herokuapp.com/products/brands")
         .then((res) => res.data),
   });
 

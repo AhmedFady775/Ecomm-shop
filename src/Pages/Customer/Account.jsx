@@ -39,7 +39,7 @@ function Account() {
         type: "UPDATE_REQUEST",
       });
       const { data } = await axios.put(
-        "http://localhost:3001/users/edit",
+        "https://ecomm12.herokuapp.com/users/edit",
         {
           firstName,
           lastName,
