@@ -11,14 +11,15 @@ import { TbTruckReturn } from "react-icons/tb";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { AiOutlineHeart } from "react-icons/ai";
+import { userInfoStore } from "../suztand/Store";
 
 function Cart() {
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
-    userInfo,
     cart: { cartItems },
   } = state;
+  const userInfo = userInfoStore((state) => state.userInfo);
 
   const updateCartHandler = async (item, quantity) => {
     await axios.get(`https://ecomm12.herokuapp.com/products/${item._id}`);

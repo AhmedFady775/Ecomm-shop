@@ -8,14 +8,14 @@ import { FiRefreshCw } from "react-icons/fi";
 import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { HiOutlineCreditCard } from "react-icons/hi";
-import { TbTruckReturn } from "react-icons/tb";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { userInfoStore } from "../../suztand/Store";
 
 function CustomerNav() {
   const location = useLocation();
-  const { dispatch: ctxDispatch } = useContext(Store);
+  const UserSignOut = userInfoStore((state) => state.userSignOut);
   const signoutHandler = () => {
-    ctxDispatch({ type: "USER_SIGNOUT" });
+    UserSignOut();
     localStorage.removeItem("userInfo");
     localStorage.removeItem("shippingAddress");
     localStorage.removeItem("paymentMethod");
@@ -105,7 +105,7 @@ function CustomerNav() {
             </div>
           </li>
           <li className="flex flex-row">
-            <TbTruckReturn className="mr-3" size={30} />
+            <FiRefreshCw className="mr-3" size={30} />
             <div className="flex flex-col  w-full">
               <p className="text-sm font-semibold pb-2">Return policy</p>
               <p className="text-sm font-normal pb-3">

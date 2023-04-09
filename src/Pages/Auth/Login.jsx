@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { Store } from "../../redux/Store";
 import mobileLogin from "../../../src/assets/loginPic-01.png";
 import CircularProgress from "@mui/material/CircularProgress";
+import { userInfoStore } from "../../suztand/Store";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -28,11 +29,13 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { state, dispatch: ctxDispatch } = useContext(Store);
-  const { userInfo } = state;
+  const userInfo = userInfoStore((state) => state.userInfo);
+  const SetUser = userInfoStore((state) => state.userSignIn);
+
   const [{ loading }, dispatch] = useReducer(reducer, {
     loading: false,
   });
+
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -45,7 +48,8 @@ export default function Login() {
           password,
         }
       );
-      ctxDispatch({ type: "USER_SIGNIN", payload: data });
+      console.log(data);
+      SetUser(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
       dispatch({ type: "LOGIN_SUCCESS" });
       navigate(redirect || "/");

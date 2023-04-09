@@ -7,6 +7,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import mobileLogin from "../../../src/assets/loginPic-01.png";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Store } from "../../redux/Store";
+import { userInfoStore } from "../../suztand/Store";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -32,8 +33,8 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordShown, setPasswordShown] = useState(false);
-  const { state, dispatch: ctxDispatch } = useContext(Store);
-  const { userInfo } = state;
+  const userInfo = userInfoStore((state) => state.userInfo);
+  const SetUser = userInfoStore((state) => state.userSignIn);
 
   const [{ loading }, dispatch] = useReducer(reducer, {
     loading: false,
@@ -53,7 +54,7 @@ export default function Register() {
           password,
         }
       );
-      ctxDispatch({ type: "USER_SIGNIN", payload: data });
+      SetUser(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
       dispatch({ type: "LOGIN_SUCCESS" });
       navigate(redirect || "/");

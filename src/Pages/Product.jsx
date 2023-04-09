@@ -56,8 +56,20 @@ const Product = () => {
   }
 
   const { isLoading, data: products } = useQuery({
-    queryKey: ["repoData", { page, sortPrice, category, order }],
+    queryKey: ["repoData", { page, sortPrice, category, order, brand }],
     queryFn: fetchPosts,
+  });
+
+  async function fetchCategory() {
+    const { data } = await axios.get(
+      `https://ecomm12.herokuapp.com/categories/name/${category}`
+    );
+    return data;
+  }
+
+  const { data: categoryfinal } = useQuery({
+    queryKey: ["repoData", { category }],
+    queryFn: fetchCategory,
   });
 
   const breadcrumbs = [
@@ -111,8 +123,12 @@ const Product = () => {
         clear
       </p>
       <RadioGroup value={brand} onChange={handleBrandChange}>
-        {products?.brands.map((brand) => (
-          <FormControlLabel value={brand} control={<Radio />} label={brand} />
+        {categoryfinal?.brands?.map((brand) => (
+          <FormControlLabel
+            value={brand.name}
+            control={<Radio />}
+            label={brand.name}
+          />
         ))}
       </RadioGroup>
     </FormGroup>

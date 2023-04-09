@@ -12,6 +12,7 @@ import FormGroup from "@mui/material/FormGroup";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import { Drawer } from "@mui/material";
+import { motion, AnimatePresence } from "framer-motion";
 
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -24,7 +25,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 
 const Shop = () => {
   const [page, setPage] = useState(1);
-  const handleChange = (event, value) => {
+  const handleChange = (_event, value) => {
     setPage(value);
   };
 
@@ -56,6 +57,14 @@ const Shop = () => {
   const { isLoading, data: products } = useQuery({
     queryKey: ["repoData", { page, sortPrice, brand, order }],
     queryFn: fetchPosts,
+  });
+
+  const { data: brands } = useQuery({
+    queryKey: ["brands"],
+    queryFn: () =>
+      axios
+        .get("https://ecomm12.herokuapp.com/products/brands")
+        .then((res) => res.data),
   });
 
   const breadcrumbs = [
@@ -98,15 +107,15 @@ const Shop = () => {
   );
 
   const CATEGORIES = () => (
-    <FormGroup className="my-4">
+    <FormGroup className="m-4 cursor-default">
       <p
-        className="text-[#0066be] cursor-pointer font-medium"
+        className="text-[#0066be] cursor-pointer font-medium w-fit"
         onClick={() => setBrand(" ")}
       >
         clear
       </p>
       <RadioGroup value={brand} onChange={handleBrandChange}>
-        {products?.brands.map((brand) => (
+        {brands?.map((brand) => (
           <FormControlLabel value={brand} control={<Radio />} label={brand} />
         ))}
       </RadioGroup>
@@ -128,6 +137,7 @@ const Shop = () => {
       >
         clear
       </p>
+
       <RadioGroup value={brand} onChange={handleBrandChange}>
         {products?.brands.map((brand) => (
           <FormControlLabel value={brand} control={<Radio />} label={brand} />
@@ -219,8 +229,18 @@ const Shop = () => {
             <AddIcon sx={{ fontSize: 20 }} />
           )}
         </div>
-
-        {openbrand ? CATEGORIES() : null}
+        <AnimatePresence>
+          {openbrand && (
+            <motion.div
+              initial={{ height: 0 }}
+              animate={{ height: "auto" }}
+              exit={{ height: 0 }}
+              className="overflow-hidden"
+            >
+              {CATEGORIES()}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </li>
 
       {/* <li className="flex flex-col py-4 cursor-pointer">
@@ -272,9 +292,15 @@ const Shop = () => {
             <section className="flex flex-col  rounded">
               <div className="flex items-center py-[26px] px-[24px] border-b text-[1.15rem] font-semibold leading-6 tracking-[-1px] border-gray-200">
                 All Products
-                <span className="ml-2 flex text-sm rounded-full items-center py-1 px-3 bg-slate-100">
-                  {products?.countProducts}
-                </span>
+                {products?.countProducts ? (
+                  <span className="ml-2 flex text-sm rounded-full items-center py-1 px-3 bg-slate-100">
+                    {products?.countProducts}
+                  </span>
+                ) : (
+                  <span className="ml-2 flex text-sm rounded-full items-center py-1 px-3 bg-slate-100">
+                    ...{" "}
+                  </span>
+                )}
               </div>
               <section className="lg:hidden flex flex-col">
                 {filtermob()}

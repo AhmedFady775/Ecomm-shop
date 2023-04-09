@@ -8,10 +8,10 @@ import { CircularProgress } from "@mui/material";
 import EMPTY from "../../assets/empty_orders.jpg";
 import { useState } from "react";
 import OrderModal from "../../components/OrderModal";
+import { userInfoStore } from "../../suztand/Store";
 
 function OrderHistory() {
-  const { state } = useContext(Store);
-  const { userInfo } = state;
+  const userInfo = userInfoStore((state) => state.userInfo);
 
   const { isLoading, data: orders } = useQuery({
     queryKey: ["repoData"],

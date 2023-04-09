@@ -4,8 +4,6 @@ import { useContext } from "react";
 import CustomerNav from "./CustomerNav";
 
 function Returns() {
-  const { state } = useContext(Store);
-  const { userInfo } = state;
   return (
     <div>
       <div className="flex flex-col lg:flex-row lg:w-max-[1184px] lg:w-[1184px] lg:m-auto pt-[60px] lg:pt-4 lg:px-0 bg-[#f4f5f6] lg:bg-white">

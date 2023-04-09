@@ -5,6 +5,7 @@ import CustomerNav from "./CustomerNav";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
+import { userInfoStore } from "../../suztand/Store";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -21,8 +22,9 @@ const reducer = (state, action) => {
 };
 
 function Account() {
-  const { state, dispatch: ctxDispatch } = useContext(Store);
-  const { userInfo } = state;
+  const userInfo = userInfoStore((state) => state.userInfo);
+  const SetUser = userInfoStore((state) => state.userSignIn);
+
   const [firstName, setFirstName] = useState(userInfo.firstName);
   const [lastName, setLastName] = useState(userInfo.lastName);
   const [email, setEmail] = useState(userInfo.email);
@@ -53,7 +55,7 @@ function Account() {
       dispatch({
         type: "UPDATE_SUCCESS",
       });
-      ctxDispatch({ type: "USER_SIGNIN", payload: data });
+      SetUser(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
       toast.success("User updated successfully");
     } catch {
@@ -111,7 +113,10 @@ function Account() {
                 />
               </div>
               <div className="flex flex-row items-center justify-end h-[57px] gap-4 px-[24px] py-[12px] border-t font-medium ">
-                <button className="flex items-center justify-center py-[6px] px-[12px] text-white bg-[#0e001a] rounded-lg w-[80px] h-[32px] border-2 border-[#0e001a] hover:bg-transparent hover:text-[#0e001a] transition">
+                <button
+                  onClick={editData}
+                  className="flex items-center justify-center py-[6px] px-[12px] text-white bg-[#0e001a] rounded-lg w-[80px] h-[32px] border-2 border-[#0e001a] hover:bg-transparent hover:text-[#0e001a] transition"
+                >
                   Save
                 </button>
               </div>
@@ -129,7 +134,10 @@ function Account() {
                 />
               </div>
               <div className="flex flex-row items-center justify-end h-[57px] gap-4 px-[24px] py-[12px] border-t font-medium ">
-                <button className="flex items-center justify-center py-[6px] px-[12px] text-white bg-[#0e001a] rounded-lg w-[80px] h-[32px] border-2 border-[#0e001a] hover:bg-transparent hover:text-[#0e001a] transition">
+                <button
+                  onClick={editData}
+                  className="flex items-center justify-center py-[6px] px-[12px] text-white bg-[#0e001a] rounded-lg w-[80px] h-[32px] border-2 border-[#0e001a] hover:bg-transparent hover:text-[#0e001a] transition"
+                >
                   Save
                 </button>
               </div>
@@ -147,7 +155,10 @@ function Account() {
                 />
               </div>
               <div className="flex flex-row items-center justify-end h-[57px] gap-4 px-[24px] py-[12px] border-t font-medium ">
-                <button className="flex items-center justify-center py-[6px] px-[12px] text-white bg-[#0e001a] rounded-lg w-[80px] h-[32px] border-2 border-[#0e001a] hover:bg-transparent hover:text-[#0e001a] transition">
+                <button
+                  onClick={editData}
+                  className="flex items-center justify-center py-[6px] px-[12px] text-white bg-[#0e001a] rounded-lg w-[80px] h-[32px] border-2 border-[#0e001a] hover:bg-transparent hover:text-[#0e001a] transition"
+                >
                   Save
                 </button>
               </div>

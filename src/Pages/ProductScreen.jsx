@@ -168,7 +168,10 @@ function ProductScreen() {
               </div>
             </div>
             <div className="flex flex-col lg:w-[50%]">
-              <p className="hidden lg:flex text-lg font-normal leading-6 tracking-[-0.8px] p-4">
+              <p className="hidden lg:flex text-lg font-normal leading-6 tracking-[-0.8px] px-4 py-1">
+                {data.brand}
+              </p>
+              <p className="hidden lg:flex text-lg font-normal leading-6 tracking-[-0.8px] px-4 py-1">
                 {data.name}
               </p>
               <p className="hidden lg:block text-[2rem] font-bold leading-10 tracking-[-2px] text-[#0e001a] p-4">

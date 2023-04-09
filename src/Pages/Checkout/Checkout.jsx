@@ -11,6 +11,7 @@ import axios from "axios";
 import { Store } from "../../redux/Store";
 import { toast } from "react-toastify";
 import OrderModal from "../../components/OrderModal";
+import { userInfoStore } from "../../suztand/Store";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -29,9 +30,11 @@ function Checkout() {
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
-    userInfo,
     cart: { shippingAddress, cartItems },
   } = state;
+
+  const userInfo = userInfoStore((state) => state.userInfo);
+
   const [{ loading }, dispatch] = useReducer(reducer, {
     loading: false,
   });
