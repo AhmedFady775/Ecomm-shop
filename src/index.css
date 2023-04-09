@@ -95,3 +95,48 @@ body {
   content: "⬤";
   margin-right: 8px;
 }
+
+.my-width-enter {
+  width: 288px;
+}
+.my-width-enter-active {
+  width: 112px;
+  transition: all 500ms;
+}
+.my-width-exit {
+  width: 112px;
+}
+.my-width-exit-active {
+  width: 288px;
+  transition: all 500ms;
+}
+
+.my-node-enter {
+  opacity: 0;
+}
+.my-node-enter-active {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+.my-node-exit {
+  opacity: 1;
+}
+.my-node-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+.my-height-enter {
+  height: 0px;
+}
+.my-height-enter-active {
+  height: auto;
+  transition: height 500ms;
+}
+.my-height-exit {
+  height: auto;
+}
+.my-height-exit-active {
+  height: 0px;
+  transition: height 500ms;
+}
