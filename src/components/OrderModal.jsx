@@ -8,11 +8,12 @@ import { CircularProgress } from "@mui/material";
 import { MdDone } from "react-icons/md";
 import { Store } from "../redux/Store";
 import { Link } from "react-router-dom";
+import { userInfoStore } from "../suztand/Store";
 
 export default function OrderModal(props) {
   const navigate = useNavigate();
-  const { state, dispatch: ctxDispatch } = useContext(Store);
-  const { userInfo } = state;
+  const userInfo = userInfoStore((state) => state.userInfo);
+
   const [open, setOpen] = React.useState(props.open);
   const renderButton = props.render;
 
