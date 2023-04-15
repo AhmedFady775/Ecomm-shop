@@ -21,7 +21,7 @@ function ProductsCardGrid({ product }) {
           )}
         </div>
       </div>
-      <p className="flex mb-2 h-10">{product.slug} </p>
+      <p className="flex mb-2 h-24 lg:h-16">{product.slug} </p>
       <div className="flex flex-row items-end">
         <p className="leading-4 text-xl	font-semibold"> {product.price}</p>
         <p className="text-xs ml-1 leading-3">EGP</p>
