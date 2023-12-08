@@ -13,7 +13,7 @@ function CheckoutNav() {
     <nav className="h-14 lg:h-[72px] bg-white text-black shadow z-20">
       <section className="flex flex-row items-center justify-between h-full lg:w-max-[1184px] lg:w-[1184px] lg:m-auto px-3 lg:px-0">
         <Link className="flex mx-4 lg:mx-0" to="/">
-          <p className="text-2xl md:text-3xl font-bold Robot">V2S</p>
+          <p className="text-2xl md:text-3xl font-bold Robot">ECOMM</p>
         </Link>
         <div className="flex flex-row items-center">
           <div className="flex flex-row items-center text-sm font-semibold leading-5 tracking-[0] text-[#7f8286] fontTech">

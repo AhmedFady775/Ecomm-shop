@@ -56,7 +56,7 @@ export default function LoginForm() {
     <div className="flex flex-col items-center justify-center h-screen">
       <div className="flex absolute top-0 w-full h-[72px] items-center justify-center shadow">
         <Link to="/">
-          <p className="text-2xl md:text-3xl font-bold Robot">V2S</p>
+          <p className="text-2xl md:text-3xl font-bold Robot">ECOMM</p>
         </Link>
       </div>
       <div className="flex flex-col items-center lg:w-[378px] lg:max-w-[378px] px-4 lg:mx-auto">

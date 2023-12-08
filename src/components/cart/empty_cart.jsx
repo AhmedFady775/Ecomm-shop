@@ -17,7 +17,7 @@ export default function EmptyCart() {
               Your shopping cart is empty!{" "}
             </p>
             <p className="font-normal text-sm text-[#7f8286]">
-              V2S is the #1 place for all your surveillance devices needs,
+              ECOMM is the #1 place for all your surveillance devices needs,
               explore our wide range of products, flexible payments & offers!
             </p>
           </div>

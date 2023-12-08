@@ -194,7 +194,7 @@ function ProductScreen() {
                 Delivery to: <span className="text-[#0066be]">Cairo.</span>
               </p>
               <p className="py-2 px-4 text-sm font-semibold leading-5 tracking-[0]">
-                Sold by: <span className="text-[#0066be]">V2S.</span>
+                Sold by: <span className="text-[#0066be]">ECOMM.</span>
               </p>
 
               {/* <div className="hidden lg:flex flex-col p-4 my-2 cursor-pointer bg-white">

@@ -38,7 +38,7 @@ export default function CartItem({
           <div className="flex flex-col">
             <Link to={`/products/${item._id}`}>
               <p className="text-base">{item.slug}</p>
-              <p className="text-base pb-2">Vendor: V2S</p>
+              <p className="text-base pb-2">Vendor: ECOMM</p>
             </Link>
             <div className="flex flex-row items-end">
               <p className="leading-4 text-xl	font-semibold"> {item.price}</p>

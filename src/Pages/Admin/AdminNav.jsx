@@ -53,7 +53,7 @@ function AdminNav() {
       >
         <Link to="/">
           <li className="flex items-end font-semibold text-2xl cursor-pointer">
-            V2S
+            ECOMM
             {noFullWidth ? null : (
               <span className="text-lg text-[#68686a] ml-2">Dashboard</span>
             )}

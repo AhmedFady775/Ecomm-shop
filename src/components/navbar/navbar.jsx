@@ -95,7 +95,7 @@ function Navbar() {
           </span>
           <div className="flex flex-row items-center">
             <Link className="flex mx-4 lg:mx-0" to="/">
-              <p className="text-2xl md:text-3xl font-bold Robot">V2S</p>
+              <p className="text-2xl md:text-3xl font-bold Robot">ECOMM</p>
             </Link>
             <CategoriesMenu
               menuRef={menuRef}
