@@ -40,6 +40,12 @@ const Shop = () => {
   };
 
   const [sortPrice, setSortPrice] = useState("");
+  const [quieres, setQuieres] = useState({
+    page: 1,
+    sortPrice: "",
+    brand: "all",
+    order: "featured",
+  });
   const [order, setOrder] = useState("featured");
   const [brand, setBrand] = useState("all");
 

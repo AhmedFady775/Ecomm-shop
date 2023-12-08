@@ -1,6 +1,6 @@
 import { useState } from "react";
-import ProductsCardFlex from "../components/Product/ProductCardFlex";
-import ProductsCardGrid from "../components/Product/ProductCardGrid";
+import ProductsCardFlex from "../../components/Product/ProductCardFlex";
+import ProductsCardGrid from "../../components/Product/ProductCardGrid";
 import { Link } from "react-router-dom";
 import Pagination from "@mui/material/Pagination";
 import Skeleton from "@mui/material/Skeleton";

@@ -3,7 +3,6 @@ import { useContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
-import { Store } from "../redux/Store";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Skeleton from "@mui/material/Skeleton";
@@ -12,11 +11,11 @@ import { BsShieldCheck } from "react-icons/bs";
 import { TfiWallet } from "react-icons/tfi";
 import { FiRefreshCw } from "react-icons/fi";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { CartItemsStore } from "../../suztand/Store";
 
 function ProductScreen() {
   const { id } = useParams();
-  const { state, dispatch: ctxDispatch } = useContext(Store);
-  const { cart } = state;
+  const { addToCart, cartItems } = CartItemsStore();
 
   const { isLoading, data } = useQuery({
     queryKey: ["repoData", { id }],
@@ -25,16 +24,6 @@ function ProductScreen() {
         .get(`https://ecomm12.herokuapp.com/products/${id}`)
         .then((res) => res.data),
   });
-
-  const addToCartHandler = async () => {
-    const existItem = cart.cartItems.find((x) => x._id === data._id);
-    const quantity = existItem ? existItem.quantity + 1 : 1;
-    ctxDispatch({
-      type: "CART_ADD_ITEM",
-      payload: { ...data, quantity },
-    });
-    toast.success("Added to cart");
-  };
 
   const breadcrumbs = [
     <Link key="1" color="inherit" to="/">
@@ -181,12 +170,24 @@ function ProductScreen() {
                 </span>
               </p>
               <div className="flex flex-col p-4">
-                <button
-                  className=" bg-[#0e001a] text-white text-base font-semibold leading-6 tracking-[0] rounded p-4"
-                  onClick={addToCartHandler}
-                >
-                  Add to cart
-                </button>
+                {cartItems.some((item) => item.id === data.id) ? (
+                  <button
+                    className="rounded-lg w-full bg-gray-300 px-8 py-3 text-white transition cursor-not-allowed shadow-md"
+                    disabled
+                  >
+                    Added to cart
+                  </button>
+                ) : (
+                  <button
+                    className="rounded-lg w-full bg-primary px-8 py-3 text-white transition lg:hover:bg-primary/80 shadow-md"
+                    onClick={() => {
+                      addToCart(data);
+                      toast.success("Added to cart");
+                    }}
+                  >
+                    Add to cart
+                  </button>
+                )}
               </div>
 
               <p className="py-2 px-4 text-sm font-semibold leading-5 tracking-[0]">

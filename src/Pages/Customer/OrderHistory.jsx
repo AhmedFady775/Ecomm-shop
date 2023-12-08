@@ -23,9 +23,7 @@ function OrderHistory() {
         .then((res) => res.data),
   });
 
-  const handleClose = (setOpen) => {
-    setOpen(false);
-  };
+  const [open, setOpen] = useState(false);
 
   return (
     <div>
@@ -127,11 +125,18 @@ function OrderHistory() {
                       {order.totalPrice.toFixed(2)} EGP
                     </li>
                     <li className="lg:w-[15%] flex flex-row items-center mt-2">
+                      <button
+                        onClick={() => {
+                          setOpen(!open);
+                        }}
+                        className="bg-[#0e001a] hover:bg-[#0e001ac5] rounded text-white text-sm font-semibold py-2 px-3 transition"
+                      >
+                        Details
+                      </button>
                       <OrderModal
                         id={order._id}
-                        render={true}
-                        open={false}
-                        closeFnc={handleClose}
+                        onClose={() => setOpen(false)}
+                        open={open}
                       />
                     </li>
                   </ul>
